@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Actualiza productos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+<div th:include="template/nav.html" th:remove="tag"></div>
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center center">
+                <div class="col-md-8">
+                    <h2 class="col-md-12">Editar producto</h2>
+            <form id="editProductForm" th:object="${editProductForm}" method="post" th:action="${editMode}?@{/editProduct}:@{/productForm}">
+            <input class="form-control" type="hidden" th:field="${productForm.id}" th:if="${editMode}">
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Descripción" name="description" required="true" th:field="${productForm.description}"/>
+            </div> 
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Marca" name="brand" required="true" th:field="${productForm.brand}"/>
+            </div>
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Precio" name="price" required="true" th:field="${productForm.price}"/>
+            </div>            
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Cantidad" name="quantity" required="true" th:field="${productForm.quantity}"/>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Editar Producto </button>
+            <button type="button" onClick="location.href='productlistForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Lista de Producto </button>           
+        </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>WorkSpace</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+    <div th:include="template/nav.html" th:remove="tag"></div>
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center center">
+                <div class="col-md-8">
+                    <h2 class="col-md-12">Espacio de trabajo</h2>
+        <form id="workerForm" th:object="${workerForm}" method="post">
+            <div class="form-group" id="user-group">
+                <button type="button" onClick="location.href = 'adminForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Crear Usuario </button>
+                <button type="button" onClick="location.href = 'listForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Lista de usuarios </button>
+            </div>
+            <div class="form-group" id="user-group">
+                <button type="button" onClick="location.href = 'productForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Añadir Producto </button>
+                <button type="button" onClick="location.href = 'productlistForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  lista de Producto </button>
+            </div>
+        </form>
+                </div>
+            </div></div>
+    </body>
+</html>

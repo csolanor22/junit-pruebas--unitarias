@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Listado de productos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+    <div th:include="template/nav.html" th:remove="tag"></div>
+    <body>
+        <div class="container">
+        <div class="card center-div">
+            <div class="table-responsive">
+                <table id="productList" class="table table-bordered table-hover table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Codigo Producto</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product: ${productList}">
+                            <td th:text="${product.id}"</td>
+                            <td th:text="${product.description}"></td>
+                            <td th:text="${product.brand}"></td>                
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td>
+                                <button type="button"  th:onclick="editFunction([[${product.id}]])" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Editar </button>
+                                <button type="button" th:onclick="deleteFunction([[${product.id}]])" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Eliminar </button> 
+                            </td>
+
+                    </tbody>
+                </table>
+                <div class="alert alert-danger text-center" th:if="${succesMessage}" th:text="${succesMessage}">Succes Message</div>
+            </div>
+        </div>
+        </div>
+<script>
+function deleteFunction(id) {
+  var r = confirm("Desea eliminar el producto??? "+id);
+  if (r === true) {
+    window.location = "deleteProduct/"+id;
+  } else {
+  }
+}
+</script>
+<script>
+function editFunction(id) {   
+    if(id != null){
+    window.location = "editProduct/"+id;
+    }
+  }
+</script>
+</body>
+</html>

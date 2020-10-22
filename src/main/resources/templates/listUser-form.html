@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Listado de usuario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+    <div th:include="template/nav.html" th:remove="tag"></div>
+    <body>
+        <div class="container">
+        <div class="card center-div">
+<div class="table-responsive">
+    <table id="userList" class="table table-bordered table-hover table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">N° Documento</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user: ${userList}">
+                <td th:text="${user.id}" th:id="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.rol}"></td>
+                <td>
+                    <button type="button"  th:onclick="editFunction([[${user.id}]])" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Editar </button>
+                    <button type="button" th:onclick="deleteFunction([[${user.id}]])" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Eliminar </button> 
+                </td>
+
+        </tbody>
+    </table>
+    <div class="alert alert-danger text-center" th:if="${succesMessage}" th:text="${succesMessage}">Succes Message</div>
+</div>
+            </div>
+            </div>
+<script>
+function deleteFunction(id) {
+  var r = confirm("Desea eliminar el usuario??? "+id);
+  if (r === true) {
+    window.location = "deleteUser/"+id;
+  } else {
+  }
+}
+</script>
+<script>
+function editFunction(id) {   
+    if(id != null){
+    window.location = "editUser/"+id;
+    }
+  }
+</script>
+    </body>
+</html>

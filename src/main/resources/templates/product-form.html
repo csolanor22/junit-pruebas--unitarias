@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ingreso de producto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+<div th:include="template/nav.html" th:remove="tag"></div>
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center center">
+                <div class="col-md-8">
+                    <h2 class="col-md-12">Crear Producto</h2>
+        <form id="productForm" th:object="${productForm}" method="post">
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Código del Producto" name="id" required="true"/>
+            </div>
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Descripción" name="description" required="true"/>
+            </div>
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Marca" name="brand" />
+            </div>
+            <div class="form-group" id="user-group">
+                <input type="text" class="form-control" placeholder="Precio" name="price" required="true"/>
+            </div>
+            <div class="form-group" id="contrasena-group">
+                <input type="text" class="form-control" placeholder="Cantidad" name="quantity"/>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Registrar Producto </button>
+            <button type="button" onClick="location.href='productlistForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Lista de Productos </button>           
+        </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

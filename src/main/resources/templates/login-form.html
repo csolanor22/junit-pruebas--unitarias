@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ingreso de usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:include="template/header.html" th:remove="tag"></div>
+    </head>
+    <body>
+        <div class="container">
+             <div class="row justify-content-md-center center">
+            <div class="card col-md-4 loginForm">
+               
+               <div class="card-body">
+                   <div class="card-title" style="text-align: center;"><h2>Bienvenido a HulkStore</h2></div>
+                   <form id="loginForm" th:object="${loginForm}" method="post">
+                           <div class="form-group" id="user-group">
+                               <input type="text" class="form-control" placeholder="Ingrese su usuario" name="name" required="true"/>
+                           </div>
+                           <div class="form-group" id="contrasena-group">
+                               <input type="password" class="form-control" placeholder="Contrasena" name="pass" required="true"/>
+                           </div>
+                       <div style="text-align: center;">
+                           <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                           <button type="button" onClick="location.href='registerForm'" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Nuevo registro </button>
+                       </div>
+                           <div class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}">Error Message</div>
+                           <div class="alert alert-danger text-center" th:if="${succesMessage}" th:text="${succesMessage}">Succes Message</div>
+                       </form>
+               </div>
+             </div>
+        </div>
+            </div>
+    </body>
+</html>

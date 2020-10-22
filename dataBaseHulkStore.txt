@@ -1,0 +1,115 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.2
+-- Dumped by pg_dump version 12.2
+
+-- Started on 2020-10-08 19:39:30
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 203 (class 1259 OID 25046)
+-- Name: product; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.product (
+    id character varying(10) NOT NULL,
+    description character varying(40),
+    brand character varying(20),
+    quantity character varying(40),
+    price character varying(30)
+);
+
+
+ALTER TABLE public.product OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 25041)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id character varying(10) NOT NULL,
+    name character varying(20),
+    email character varying(20),
+    rol character varying(12),
+    pass character varying(30)
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 2820 (class 0 OID 25046)
+-- Dependencies: 203
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.product (id, description, brand, quantity, price) VALUES ('4343', 'arroz', '333', '333', '333');
+INSERT INTO public.product (id, description, brand, quantity, price) VALUES ('010', 'arroz', 'arroz', 'arroz', 'arroz');
+INSERT INTO public.product (id, description, brand, quantity, price) VALUES ('2', 'arroz', 'arroz', 'arroz', 'arroz');
+INSERT INTO public.product (id, description, brand, quantity, price) VALUES ('111', 'aaa', 'aaa', '1', '1212');
+
+
+--
+-- TOC entry 2819 (class 0 OID 25041)
+-- Dependencies: 202
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('008', 'prueba2', 'u@gmail.com', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('009', 'prueba3', 'q@gmail.com', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('010', 'prueba4', 'l@gmail.com', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('005', 'Cambio', 'Cambio@gmail.com', '1', '4321');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('007', 'test', 'prueba@gmail.com', '1', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('006', 'cambio', 'cambio@gmail.com', '1', '4321');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('111', 'jueves1', 'jueves1@l.com', '1', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('0008', 'prueba1', 'r@gmail.com', '2', '12345');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('333', 'wapeton', 'juev22es1@l.com', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('1212', 'wapeton', 'e.@gmailcom', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('999', 'qqq', 'jueves1@l.com', '2', '1234');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('1144', 'pipe', 'pipe@g.com', '2', '1144');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('eee', 'eee', 'ee@r.com', '2', 'eeee');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('9999', 'jueves1', 'jueves1@l.com', '2', '9999');
+INSERT INTO public.users (id, name, email, rol, pass) VALUES ('123456', 'pipe andres', 'ee@r.com', '1', '123456');
+
+
+--
+-- TOC entry 2692 (class 2606 OID 25050)
+-- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2690 (class 2606 OID 25045)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2020-10-08 19:39:30
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Listado de productos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div th:include="template/header.html" th:remove="tag"></div>
+</head>
+<div th:include="template/nav.html" th:remove="tag"></div>
+<body>
+    <div class="table-responsive">        
+        <div class="alert alert-danger text-center" th:if="${succesMessage}" th:text="${succesMessage}">Succes Message</div>
+    </div>
+    <div class="container mt-12">
+        <div class="row">
+            <div class="col-sm-4 product-list" th:each="product: ${productList}"> 
+                <div class="card"> 
+                    <div class="card-header text-center"> 
+                        <h2>[[${product.description}]]</h2>
+                    </div>
+                    <div class="card-body"> 
+                        <i>[[${product.price}]]</i>
+                        <img src="" width="200" height="180">
+                    </div>
+                    <div class="card-footer text-center"> 
+                        <label>[[${product.brand}]]</label>
+                        <div> 
+                            <a onClick="location.href = 'getShoppingCar'" class="btn btn-outline-info">Agregar a carrito</a>
+                            <a class="btn btn-danger">Comprar</a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</body>
+</html>
