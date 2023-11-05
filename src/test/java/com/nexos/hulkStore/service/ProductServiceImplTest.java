@@ -5,8 +5,6 @@
  */
 package com.nexos.hulkStore.service;
 
-import com.nexos.hulkStore.domain.Product;
-import com.nexos.hulkStore.repository.ProductRepository;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertNotNull;
@@ -18,6 +16,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.nexos.hulkstore.domain.Product;
+import com.nexos.hulkstore.repository.ProductRepository;
+import com.nexos.hulkstore.service.ProductService;
+import com.nexos.hulkstore.service.ProductServiceImpl;
 
 /**
  *

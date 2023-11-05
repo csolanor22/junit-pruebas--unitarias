@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.domain;
+package com.nexos.hulkstore.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
