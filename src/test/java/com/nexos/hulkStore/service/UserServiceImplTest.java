@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.service;
+package com.nexos.hulkstore.service;
 
-import com.nexos.hulkStore.domain.User;
-import com.nexos.hulkStore.repository.UserRepository;
 import java.util.Optional;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,6 +18,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.nexos.hulkstore.domain.User;
+import com.nexos.hulkstore.repository.UserRepository;
+import com.nexos.hulkstore.service.UserService;
+import com.nexos.hulkstore.service.UserServiceImpl;
 
 /**
  *

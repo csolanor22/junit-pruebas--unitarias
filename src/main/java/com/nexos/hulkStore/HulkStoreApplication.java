@@ -1,4 +1,4 @@
-package com.nexos.hulkStore;
+package com.nexos.hulkstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

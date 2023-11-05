@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.controller;
+package com.nexos.hulkstore.controller;
 
-import com.nexos.hulkStore.domain.Product;
-import com.nexos.hulkStore.domain.User;
-import com.nexos.hulkStore.service.ProductService;
-import com.nexos.hulkStore.service.UserService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -22,6 +18,12 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
+
+import com.nexos.hulkstore.controller.ControllerIntarface;
+import com.nexos.hulkstore.domain.Product;
+import com.nexos.hulkstore.domain.User;
+import com.nexos.hulkstore.service.ProductService;
+import com.nexos.hulkstore.service.UserService;
 
 /**
  *
