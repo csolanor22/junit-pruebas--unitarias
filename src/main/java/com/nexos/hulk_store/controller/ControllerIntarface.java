@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.controller;
+package com.nexos.hulk_store.controller;
 
-import com.nexos.hulkStore.domain.Product;
-import com.nexos.hulkStore.domain.User;
-import com.nexos.hulkStore.service.ProductService;
-import com.nexos.hulkStore.service.UserService;
+import com.nexos.hulk_store.domain.Product;
+import com.nexos.hulk_store.domain.User;
+import com.nexos.hulk_store.service.ProductService;
+import com.nexos.hulk_store.service.UserService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +49,7 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/login")
-    public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
+    public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) com.nexos.hulk_store.controller.dtos.User user, ModelMap model) {
         try {
             User response = userService.getAllUserById(user.getNameUser());
             
@@ -84,7 +84,7 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/adminForm")
-    public String userCreateForm(@ModelAttribute("adminForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
+    public String userCreateForm(@ModelAttribute("adminForm") com.nexos.hulk_store.controller.dtos.User user, ModelMap model) {
         try {
             userService.getAllUserById(user.getUserId());
             model.addAttribute(USER_LIST_STR, userService.getAllUser());
@@ -100,7 +100,7 @@ public class ControllerIntarface {
         }
     }
 
-    private User mapUserDtotoUser(com.nexos.hulkStore.controller.dtos.User user) {
+    private User mapUserDtotoUser(com.nexos.hulk_store.controller.dtos.User user) {
         User userModel = new User();
         userModel.setPass(user.getPassUser());
         userModel.setRol(user.getRolUser());
@@ -110,7 +110,7 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/registerForm")
-    public String customerCreateForm(@ModelAttribute("registerForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
+    public String customerCreateForm(@ModelAttribute("registerForm") com.nexos.hulk_store.controller.dtos.User user, ModelMap model) {
         user.setRolUser("2");
         try {
             userService.getAllUserById(user.getUserId());
@@ -135,7 +135,7 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/editUser")
-    public String postEditForm(@ModelAttribute("adminForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
+    public String postEditForm(@ModelAttribute("adminForm") com.nexos.hulk_store.controller.dtos.User user, ModelMap model) {
         try {
             userService.editUser(this.mapUserDtotoUser(user));
             model.addAttribute(SUCCESS_MESSAGE_STR, "Usuario editado con exito.");

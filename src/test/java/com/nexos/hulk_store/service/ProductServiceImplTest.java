@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.service;
+package com.nexos.hulk_store.service;
 
-import com.nexos.hulkStore.domain.Product;
-import com.nexos.hulkStore.repository.ProductRepository;
+import com.nexos.hulk_store.domain.Product;
+import com.nexos.hulk_store.repository.ProductRepository;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertNotNull;

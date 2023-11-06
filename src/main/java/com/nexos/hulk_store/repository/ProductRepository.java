@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkStore.repository;
+package com.nexos.hulk_store.repository;
 
-import com.nexos.hulkStore.domain.Product;
+import com.nexos.hulk_store.domain.Product;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
