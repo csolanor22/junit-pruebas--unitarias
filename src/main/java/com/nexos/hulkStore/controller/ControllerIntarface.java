@@ -32,6 +32,11 @@ public class ControllerIntarface {
     @Autowired
     private ProductService productService;
 
+    private static final String LOGIN_FORM_STR = "login-form";
+    private static final String LIST_USER_FORM_STR = "listUser-form";
+    private static final String LIST_PRODUCT_FORM_STR = "listProduct-form";
+    private static final String PRODUCT_LIST_STR = "productList";
+
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ControllerIntarface.class);
 
     /**
@@ -39,11 +44,11 @@ public class ControllerIntarface {
      */
     @GetMapping("/login")
     public String loginForm() {
-        return "login-form";
+        return LOGIN_FORM_STR;
     }
 
     @PostMapping("/login")
-    public String loginValidate(@ModelAttribute("loginForm") User user, ModelMap model) {
+    public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) User user, ModelMap model) {
         try {
             User response = userService.getAllUserById(user.getName());
             
@@ -58,11 +63,11 @@ public class ControllerIntarface {
             }
             model.addAttribute("errorMessage", "Contraseña incorrecta");
             LOGGER.info("Password incorrect.....");
-            return "login-form";
+            return LOGIN_FORM_STR;
         } catch (Exception ex) {
             model.addAttribute("errorMessage", "El usuario no existe");
             LOGGER.info("El usuario no existe....");
-            return "login-form";
+            return LOGIN_FORM_STR;
         }
     }
 
@@ -84,13 +89,13 @@ public class ControllerIntarface {
             model.addAttribute("userList", userService.getAllUser());
             model.addAttribute("succesMessage", "Este documento ya esta registrado.");
             LOGGER.info("El usuario ya existe!!!...");
-            return "listUser-form";
+            return LIST_USER_FORM_STR;
         } catch (Exception ex) {
             userService.createUser(user);
             model.addAttribute("userList", userService.getAllUser());
             model.addAttribute("succesMessage", "Usuario creado con exito.");
             LOGGER.info("Usuario creado!!!...");
-            return "listUser-form";
+            return LIST_USER_FORM_STR;
         }
     }
 
@@ -126,12 +131,12 @@ public class ControllerIntarface {
             model.addAttribute("succesMessage", "Usuario editado con exito.");
             model.addAttribute("userList", userService.getAllUser());
             LOGGER.info("Usuario editado!!!...");
-            return "listUser-form";
+            return LIST_USER_FORM_STR;
         } catch (Exception ex) {
             model.addAttribute("succesMessage", "Usuario no editado.");
             model.addAttribute("userList", userService.getAllUser());
             LOGGER.info("No se puede editar el usuario !!!...");
-            return "listUser-form";
+            return LIST_USER_FORM_STR;
         }
     }
 
@@ -144,7 +149,7 @@ public class ControllerIntarface {
     @GetMapping("/listForm")
     public String listForm(ModelMap model) {
         model.addAttribute("userList", userService.getAllUser());
-        return "listUser-form";
+        return LIST_USER_FORM_STR;
     }
 
     @GetMapping("/registerForm")
@@ -169,13 +174,13 @@ public class ControllerIntarface {
      */
     @GetMapping("/productlistForm")
     public String productListForm(ModelMap model) {
-        model.addAttribute("productList", productService.getAllProduct());
-        return "listProduct-form";
+        model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
+        return LIST_PRODUCT_FORM_STR;
     }
 
     @GetMapping("/productlistClientForm")
     public String productlistClientForm(ModelMap model) {
-        model.addAttribute("productList", productService.getAllProduct());
+        model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
         return "listProductClient-form";
     }
 
@@ -188,16 +193,16 @@ public class ControllerIntarface {
     public String postProductForm(@ModelAttribute("adminForm") Product product, ModelMap model) {
         try {
             productService.getAllProductById(product.getId());
-            model.addAttribute("productList", productService.getAllProduct());
+            model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             model.addAttribute("succesMessage", "Este producto ya fue registrado.");
             LOGGER.info("El producto ya existe!!!...");
-            return "listProduct-form";
+            return LIST_PRODUCT_FORM_STR;
         } catch (Exception ex) {
             productService.createProduct(product);
-            model.addAttribute("productList", productService.getAllProduct());
+            model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             model.addAttribute("succesMessage", "producto ingresado con exito.");
             LOGGER.info("productp ingresado!!!...");
-            return "listProduct-form";
+            return LIST_PRODUCT_FORM_STR;
         }
     }
 
@@ -214,14 +219,14 @@ public class ControllerIntarface {
         try {
             productService.editProduct(product);
             model.addAttribute("succesMessage", "Producto editado con exito.");
-            model.addAttribute("productList", productService.getAllProduct());
+            model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             LOGGER.info("Producto editado!!!...");
-            return "listProduct-form";
+            return LIST_PRODUCT_FORM_STR;
         } catch (Exception ex) {
             model.addAttribute("succesMessage", "Producto no editado.");
-            model.addAttribute("productList", productService.getAllProduct());
+            model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             LOGGER.info("No se puede editar el Producto !!!...");
-            return "listProduct-form";
+            return LIST_PRODUCT_FORM_STR;
         }
     }
 
