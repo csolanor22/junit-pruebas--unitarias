@@ -51,9 +51,9 @@ public class ControllerIntarface {
     @PostMapping("/login")
     public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
         try {
-            User response = userService.getAllUserById(user.getName());
+            User response = userService.getAllUserById(user.getNameUser());
             
-            if (user.getPass().equals(response.getPass())) {
+            if (user.getPassUser().equals(response.getPass())) {
                 if (response.getRol().equals("1")) {
                     LOGGER.info("Send to formAdmin......");
                     return "redirect:/listForm";
@@ -86,7 +86,7 @@ public class ControllerIntarface {
     @PostMapping("/adminForm")
     public String userCreateForm(@ModelAttribute("adminForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
         try {
-            userService.getAllUserById(user.getId());
+            userService.getAllUserById(user.getUserId());
             model.addAttribute(USER_LIST_STR, userService.getAllUser());
             model.addAttribute(SUCCESS_MESSAGE_STR, "Este documento ya esta registrado.");
             LOGGER.info("El usuario ya existe!!!...");
@@ -102,18 +102,18 @@ public class ControllerIntarface {
 
     private User mapUserDtotoUser(com.nexos.hulkStore.controller.dtos.User user) {
         User userModel = new User();
-        userModel.setPass(user.getPass());
-        userModel.setRol(user.getRol());
-        userModel.setEmail(user.getEmail());
-        userModel.setName(user.getName());
+        userModel.setPass(user.getPassUser());
+        userModel.setRol(user.getRolUser());
+        userModel.setEmail(user.getEmailUser());
+        userModel.setName(user.getNameUser());
         return userModel;
     }
 
     @PostMapping("/registerForm")
     public String customerCreateForm(@ModelAttribute("registerForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
-        user.setRol("2");
+        user.setRolUser("2");
         try {
-            userService.getAllUserById(user.getId());
+            userService.getAllUserById(user.getUserId());
             model.addAttribute(SUCCESS_MESSAGE_STR, "Este documento ya esta registrado.");
             LOGGER.info("El usuario ya existe!!!...");
             return "redirect:/login";

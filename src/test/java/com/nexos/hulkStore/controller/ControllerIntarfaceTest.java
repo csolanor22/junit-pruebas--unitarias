@@ -104,7 +104,7 @@ public class ControllerIntarfaceTest {
     public void testLoginValidateStageThree() {
         com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         User user1 = createUser();
-        user.setRol("2");
+        user.setRolUser("2");
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getId())).thenReturn(user1);
         String form = controllerIntarface.loginValidate(user, map);
@@ -116,7 +116,7 @@ public class ControllerIntarfaceTest {
         com.nexos.hulkStore.controller.dtos.User user2 = createUserDto();
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getId())).thenReturn(user);
-        user2.setPass("7894");
+        user2.setPassUser("7894");
         String form = controllerIntarface.loginValidate(user2, map);
         Assert.assertEquals("login-form",form);
     }
@@ -354,10 +354,10 @@ public class ControllerIntarfaceTest {
     private com.nexos.hulkStore.controller.dtos.User createUserDto() {
         com.nexos.hulkStore.controller.dtos.User user = new com.nexos.hulkStore.controller.dtos.User();
         user.setId("008");
-        user.setName("008");
-        user.setEmail("test@.gmail.com");
-        user.setPass("1234");
-        user.setRol("1");
+        user.setNameUser("008");
+        user.setEmailUser("test@.gmail.com");
+        user.setPassUser("1234");
+        user.setRolUser("1");
         return user;
     }
 

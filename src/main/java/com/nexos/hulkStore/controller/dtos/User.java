@@ -2,53 +2,53 @@ package com.nexos.hulkStore.controller.dtos;
 
 public class User {
 
-    private String id;
+    private String userId;
 
-    private String name;
+    private String nameUser;
 
-    private String email;
+    private String emailUser;
 
-    private String pass;
+    private String passUser;
 
-    private String rol;
+    private String rolUser;
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 
-    public String getRol() {
-        return rol;
+    public String getRolUser() {
+        return rolUser;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRolUser(String rolUser) {
+        this.rolUser = rolUser;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassUser() {
+        return passUser;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassUser(String passUser) {
+        this.passUser = passUser;
     }
 }
