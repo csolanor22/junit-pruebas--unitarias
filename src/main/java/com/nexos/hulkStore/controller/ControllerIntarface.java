@@ -36,6 +36,8 @@ public class ControllerIntarface {
     private static final String LIST_USER_FORM_STR = "listUser-form";
     private static final String LIST_PRODUCT_FORM_STR = "listProduct-form";
     private static final String PRODUCT_LIST_STR = "productList";
+    private static final String USER_LIST_STR = "userList";
+    private static final String SUCCESS_MESSAGE_STR = "succesMessage";
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ControllerIntarface.class);
 
@@ -48,11 +50,11 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/login")
-    public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) User user, ModelMap model) {
+    public String loginValidate(@ModelAttribute(LOGIN_FORM_STR) com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
         try {
-            User response = userService.getAllUserById(user.getName());
+            User response = userService.getAllUserById(user.getNameUser());
             
-            if (user.getPass().equals(response.getPass())) {
+            if (user.getPassUser().equals(response.getPass())) {
                 if (response.getRol().equals("1")) {
                     LOGGER.info("Send to formAdmin......");
                     return "redirect:/listForm";
@@ -83,33 +85,42 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/adminForm")
-    public String userCreateForm(@ModelAttribute("adminForm") User user, ModelMap model) {
+    public String userCreateForm(@ModelAttribute("adminForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
         try {
-            userService.getAllUserById(user.getId());
-            model.addAttribute("userList", userService.getAllUser());
-            model.addAttribute("succesMessage", "Este documento ya esta registrado.");
+            userService.getAllUserById(user.getUserId());
+            model.addAttribute(USER_LIST_STR, userService.getAllUser());
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Este documento ya esta registrado.");
             LOGGER.info("El usuario ya existe!!!...");
             return LIST_USER_FORM_STR;
         } catch (Exception ex) {
-            userService.createUser(user);
-            model.addAttribute("userList", userService.getAllUser());
-            model.addAttribute("succesMessage", "Usuario creado con exito.");
+            userService.createUser(this.mapUserDtotoUser(user));
+            model.addAttribute(USER_LIST_STR, userService.getAllUser());
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Usuario creado con exito.");
             LOGGER.info("Usuario creado!!!...");
             return LIST_USER_FORM_STR;
         }
     }
 
+    private User mapUserDtotoUser(com.nexos.hulkStore.controller.dtos.User user) {
+        User userModel = new User();
+        userModel.setPass(user.getPassUser());
+        userModel.setRol(user.getRolUser());
+        userModel.setEmail(user.getEmailUser());
+        userModel.setName(user.getNameUser());
+        return userModel;
+    }
+
     @PostMapping("/registerForm")
-    public String customerCreateForm(@ModelAttribute("registerForm") User user, ModelMap model) {
-        user.setRol("2");
+    public String customerCreateForm(@ModelAttribute("registerForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
+        user.setRolUser("2");
         try {
-            userService.getAllUserById(user.getId());
-            model.addAttribute("succesMessage", "Este documento ya esta registrado.");
+            userService.getAllUserById(user.getUserId());
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Este documento ya esta registrado.");
             LOGGER.info("El usuario ya existe!!!...");
             return "redirect:/login";
         } catch (Exception ex) {
-            userService.createUser(user);
-            model.addAttribute("succesMessage", "Usuario creado con exito.");
+            userService.createUser(this.mapUserDtotoUser(user));
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Usuario creado con exito.");
             LOGGER.info("Usuario creado!!!...");
             return "redirect:/login";
         }
@@ -125,16 +136,16 @@ public class ControllerIntarface {
     }
 
     @PostMapping("/editUser")
-    public String postEditForm(@ModelAttribute("adminForm") User user, ModelMap model) {
+    public String postEditForm(@ModelAttribute("adminForm") com.nexos.hulkStore.controller.dtos.User user, ModelMap model) {
         try {
-            userService.editUser(user);
-            model.addAttribute("succesMessage", "Usuario editado con exito.");
-            model.addAttribute("userList", userService.getAllUser());
+            userService.editUser(this.mapUserDtotoUser(user));
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Usuario editado con exito.");
+            model.addAttribute(USER_LIST_STR, userService.getAllUser());
             LOGGER.info("Usuario editado!!!...");
             return LIST_USER_FORM_STR;
         } catch (Exception ex) {
-            model.addAttribute("succesMessage", "Usuario no editado.");
-            model.addAttribute("userList", userService.getAllUser());
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Usuario no editado.");
+            model.addAttribute(USER_LIST_STR, userService.getAllUser());
             LOGGER.info("No se puede editar el usuario !!!...");
             return LIST_USER_FORM_STR;
         }
@@ -148,7 +159,7 @@ public class ControllerIntarface {
      */
     @GetMapping("/listForm")
     public String listForm(ModelMap model) {
-        model.addAttribute("userList", userService.getAllUser());
+        model.addAttribute(USER_LIST_STR, userService.getAllUser());
         return LIST_USER_FORM_STR;
     }
 
@@ -161,7 +172,7 @@ public class ControllerIntarface {
     @GetMapping("/deleteUser/{id}")
     public String deleteUser(ModelMap model, @PathVariable(name = "id") String id) {
             userService.deleteUser(id);
-            model.addAttribute("succesMessage", "Se elimino el usuario");
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Se elimino el usuario");
             LOGGER.info("borrado exitoso...");
         return listForm(model);
     }
@@ -194,13 +205,13 @@ public class ControllerIntarface {
         try {
             productService.getAllProductById(product.getId());
             model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
-            model.addAttribute("succesMessage", "Este producto ya fue registrado.");
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Este producto ya fue registrado.");
             LOGGER.info("El producto ya existe!!!...");
             return LIST_PRODUCT_FORM_STR;
         } catch (Exception ex) {
             productService.createProduct(product);
             model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
-            model.addAttribute("succesMessage", "producto ingresado con exito.");
+            model.addAttribute(SUCCESS_MESSAGE_STR, "producto ingresado con exito.");
             LOGGER.info("productp ingresado!!!...");
             return LIST_PRODUCT_FORM_STR;
         }
@@ -218,12 +229,12 @@ public class ControllerIntarface {
     public String postEditProductForm(@ModelAttribute("productForm") Product product, ModelMap model) {
         try {
             productService.editProduct(product);
-            model.addAttribute("succesMessage", "Producto editado con exito.");
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Producto editado con exito.");
             model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             LOGGER.info("Producto editado!!!...");
             return LIST_PRODUCT_FORM_STR;
         } catch (Exception ex) {
-            model.addAttribute("succesMessage", "Producto no editado.");
+            model.addAttribute(SUCCESS_MESSAGE_STR, "Producto no editado.");
             model.addAttribute(PRODUCT_LIST_STR, productService.getAllProduct());
             LOGGER.info("No se puede editar el Producto !!!...");
             return LIST_PRODUCT_FORM_STR;
@@ -233,7 +244,7 @@ public class ControllerIntarface {
     @GetMapping("/deleteProduct/{id}")
     public String deleteProduct(ModelMap model, @PathVariable(name = "id") String id) {
         productService.deleteProduct(id);
-        model.addAttribute("succesMessage", "Se elimino el producto");
+        model.addAttribute(SUCCESS_MESSAGE_STR, "Se elimino el producto");
         return productListForm(model);
     }
 

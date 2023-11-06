@@ -74,7 +74,7 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testLoginValidate() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.loginValidate(user, map);
         assertNotNull(form);
@@ -85,38 +85,40 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testLoginValidateStageOne() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        User user1 = createUser();
         ModelMap map = createMap();
         
-        when(userService.getAllUserById(user.getId())).thenReturn(user);
+        when(userService.getAllUserById(user.getUserId())).thenReturn(user1);
         String form = controllerIntarface.loginValidate(user, map);
         Assert.assertEquals("redirect:/listForm",form);
     }
 
     @Test
     public void testLoginValidateStageTwo() {
-        User user = createUser();
-        user.setId("1");
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        user.setUserId("1");
         ModelMap map = createMap();
         String form = controllerIntarface.loginValidate(user, map);
         Assert.assertEquals("login-form",form);
     }
     @Test
     public void testLoginValidateStageThree() {
-        User user = createUser();
-        user.setRol("2");
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        User user1 = createUser();
+        user.setRolUser("2");
         ModelMap map = createMap();
-        when(userService.getAllUserById(user.getId())).thenReturn(user);
+        when(userService.getAllUserById(user.getUserId())).thenReturn(user1);
         String form = controllerIntarface.loginValidate(user, map);
         Assert.assertEquals("redirect:/productlistClientForm",form);
     }
     @Test
     public void testLoginValidateStageFour() {
         User user = createUser();
-        User user2 = createUser();
+        com.nexos.hulkStore.controller.dtos.User user2 = createUserDto();
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getId())).thenReturn(user);
-        user2.setPass("7894");
+        user2.setPassUser("7894");
         String form = controllerIntarface.loginValidate(user2, map);
         Assert.assertEquals("login-form",form);
     }
@@ -134,16 +136,16 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testUserCreateForm() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.userCreateForm(user, map);
         assertNotNull(form);
     }
         @Test
     public void testUserCreateFormStageTwo() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
-        when(userService.getAllUserById(user.getId())).thenThrow();
+        when(userService.getAllUserById(user.getUserId())).thenThrow();
         String form = controllerIntarface.userCreateForm(user, map);
         Assert.assertEquals("listUser-form",form);
     }
@@ -153,7 +155,7 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testCustomerCreateForm() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.customerCreateForm(user, map);
         assertNotNull(form);
@@ -161,9 +163,9 @@ public class ControllerIntarfaceTest {
     
     @Test
     public void testCustomerCreateFormStageTwo() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
-        when(userService.getAllUserById(user.getId())).thenThrow();
+        when(userService.getAllUserById(user.getUserId())).thenThrow();
         String form = controllerIntarface.customerCreateForm(user, map);
         assertNotNull(form);
     }
@@ -185,16 +187,17 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testPostEditForm() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.postEditForm(user, map);
         assertNotNull(form);
     }
     @Test
     public void testPostEditFormStageTwo() {
-        User user = createUser();
+        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        User user1 = createUser();
         ModelMap map = createMap();
-        when(userService.editUser(user)).thenThrow();
+        when(userService.editUser(user1)).thenThrow();
         String form = controllerIntarface.postEditForm(user, map);
         Assert.assertEquals("listUser-form",form);
     }
@@ -347,6 +350,16 @@ public class ControllerIntarfaceTest {
         user.setEmail("test@.gmail.com");
         user.setPass("1234");
         user.setRol("1");
+        return user;
+    }
+
+    private com.nexos.hulkStore.controller.dtos.User createUserDto() {
+        com.nexos.hulkStore.controller.dtos.User user = new com.nexos.hulkStore.controller.dtos.User();
+        user.setUserId("008");
+        user.setNameUser("008");
+        user.setEmailUser("test@.gmail.com");
+        user.setPassUser("1234");
+        user.setRolUser("1");
         return user;
     }
 
