@@ -1,4 +1,4 @@
-package com.nexos.hulkStore.controller.dtos;
+package com.nexos.hulk_store.controller.dtos;
 
 public class User {
 

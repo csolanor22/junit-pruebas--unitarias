@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nexos.hulkstore.controller;
+package com.nexos.hulk_store.controller;
 
+import com.nexos.hulk_store.domain.Product;
+import com.nexos.hulk_store.domain.User;
+import com.nexos.hulk_store.service.ProductService;
+import com.nexos.hulk_store.service.UserService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -18,12 +22,6 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
-
-import com.nexos.hulkstore.controller.ControllerIntarface;
-import com.nexos.hulkstore.domain.Product;
-import com.nexos.hulkstore.domain.User;
-import com.nexos.hulkstore.service.ProductService;
-import com.nexos.hulkstore.service.UserService;
 
 /**
  *
@@ -74,7 +72,7 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testLoginValidate() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.loginValidate(user, map);
         assertNotNull(form);
@@ -85,7 +83,7 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testLoginValidateStageOne() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         User user1 = createUser();
         ModelMap map = createMap();
         
@@ -96,7 +94,7 @@ public class ControllerIntarfaceTest {
 
     @Test
     public void testLoginValidateStageTwo() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         user.setUserId("1");
         ModelMap map = createMap();
         String form = controllerIntarface.loginValidate(user, map);
@@ -104,8 +102,9 @@ public class ControllerIntarfaceTest {
     }
     @Test
     public void testLoginValidateStageThree() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         User user1 = createUser();
+        user1.setRol("2");
         user.setRolUser("2");
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getUserId())).thenReturn(user1);
@@ -115,7 +114,7 @@ public class ControllerIntarfaceTest {
     @Test
     public void testLoginValidateStageFour() {
         User user = createUser();
-        com.nexos.hulkStore.controller.dtos.User user2 = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user2 = createUserDto();
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getId())).thenReturn(user);
         user2.setPassUser("7894");
@@ -136,14 +135,14 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testUserCreateForm() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.userCreateForm(user, map);
         assertNotNull(form);
     }
         @Test
     public void testUserCreateFormStageTwo() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getUserId())).thenThrow();
         String form = controllerIntarface.userCreateForm(user, map);
@@ -155,7 +154,7 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testCustomerCreateForm() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.customerCreateForm(user, map);
         assertNotNull(form);
@@ -163,7 +162,7 @@ public class ControllerIntarfaceTest {
     
     @Test
     public void testCustomerCreateFormStageTwo() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         when(userService.getAllUserById(user.getUserId())).thenThrow();
         String form = controllerIntarface.customerCreateForm(user, map);
@@ -187,14 +186,14 @@ public class ControllerIntarfaceTest {
      */
     @Test
     public void testPostEditForm() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         ModelMap map = createMap();
         String form = controllerIntarface.postEditForm(user, map);
         assertNotNull(form);
     }
     @Test
     public void testPostEditFormStageTwo() {
-        com.nexos.hulkStore.controller.dtos.User user = createUserDto();
+        com.nexos.hulk_store.controller.dtos.User user = createUserDto();
         User user1 = createUser();
         ModelMap map = createMap();
         when(userService.editUser(user1)).thenThrow();
@@ -353,8 +352,8 @@ public class ControllerIntarfaceTest {
         return user;
     }
 
-    private com.nexos.hulkStore.controller.dtos.User createUserDto() {
-        com.nexos.hulkStore.controller.dtos.User user = new com.nexos.hulkStore.controller.dtos.User();
+    private com.nexos.hulk_store.controller.dtos.User createUserDto() {
+        com.nexos.hulk_store.controller.dtos.User user = new com.nexos.hulk_store.controller.dtos.User();
         user.setUserId("008");
         user.setNameUser("008");
         user.setEmailUser("test@.gmail.com");
